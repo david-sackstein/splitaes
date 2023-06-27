@@ -46,7 +46,7 @@ class ChunkWriter:
         self.chunk_file = open(chunk_file_name, "wb")
 
     def write_line(self, line_bytes, line_size):
-        # If it is too large for the current chunk, tell the writer to close
+        # If it is too large for the current chunk close
         # the current chunk and open a new one.
         if self.acc_chunk_size + line_size > self.max_chunk_size:
             self.new_chunk()
@@ -56,7 +56,7 @@ class ChunkWriter:
         self.chunk_file.write(line_bytes)
 
         # Accumulate the size
-        self.acc_chunk_size += line_size
+        self.acc_chunk_size += (line_size + 2)
 
     def close(self):
         if self.chunk_file:
